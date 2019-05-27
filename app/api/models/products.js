@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 
-//Define a schema for Clients
+//Define a schema for Products
 const Schema = mongoose.Schema;
-const ClientSchema = new Schema({
+const ProductSchema = new Schema({
  name: {
   type: String,
   trim: true,  
@@ -13,7 +13,7 @@ const ClientSchema = new Schema({
   trim: true,
   required: true
  }
-}, { collection : 'clients' });
+}, { collection : 'products' });
 
 
-module.exports = mongoose.model('Client', ClientSchema);
+module.exports = mongoose.model('Product', ProductSchema);

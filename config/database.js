@@ -9,30 +9,30 @@ var config = {
     baseUrl: "/",
     root: rootPath,
     app: {
-      name: 'clientBD'
+      name: 'productBD'
     },
-    port: process.env.PORT || 3000,
-    db: 'mongodb://localhost/clientBD'
+    port: process.env.PORT || 4000,
+    db: 'mongodb://localhost/productBD'
   },
 
   test: {
     baseUrl: "/",
     root: rootPath,
     app: {
-      name: 'clientBD'
+      name: 'productBD'
     },
-    port: process.env.PORT || 3000,
-    db: 'mongodb://mongo-server/clientBD'
+    port: process.env.PORT || 4000,
+    db: 'mongodb://mongo-server/productBD'
   },
 
   prod: {
     baseUrl: "/",
     root: rootPath,
     app: {
-      name: 'clientBD'
+      name: 'productBD'
     },
-    port: process.env.PORT || 3000,
-    db: 'mongodb://mongo-server/clientBD'
+    port: process.env.PORT || 4000,
+    db: 'mongodb://mongo-server/productBD'
   }
 };
 

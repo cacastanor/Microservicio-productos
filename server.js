@@ -2,7 +2,7 @@
 const express = require('express');
 const bodyParser = require('body-parser')
 //App imports
-const clients = require('./routes/clients');
+const products = require('./routes/products');
 
 const config = require('./config/database'); //database configuration
 const mongoose = require('mongoose');
@@ -25,14 +25,14 @@ app.use(bodyParser.urlencoded({
 
 //Redirect all '/' request  to authentication.
 app.get('/', function(req, res){  
-  res.send('Clients CRUD ');
+  res.send('Products CRUD ');
 });
 
 //Statics (Styles and JS)
 app.use(express.static(__dirname + '/public/'));
 
 //Public routes
-app.use('/clients', clients);
+app.use('/products', products);
 
 // Handle errors
 app.use(function(err, req, res, next) {
@@ -44,7 +44,7 @@ app.use(function(err, req, res, next) {
     }
 });
 
-//Server listening at port 3000
-app.listen(3000, function(){
-	console.log('Node server listening on port 3000');
+//Server listening at port 4000
+app.listen(4000, function(){
+	console.log('Node server listening on port 4000');
 });
