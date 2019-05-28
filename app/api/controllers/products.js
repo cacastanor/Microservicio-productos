@@ -1,5 +1,8 @@
 //Imports User Model
-const productModel = require('../models/products');
+//const productModel = require('../models/products');
+const productModel = require('../product/product');
+const E = require("../events");
+//const Product = require("../product/product");
 
 module.exports = {
 
@@ -59,5 +62,33 @@ delete: function(req, res, next) {
       }else
       return res.json({result})
    });
+  },
+
+  eventCreate: async(req, res) => {
+    const createProduct = E.CreateProduct({cc: req.body.cc, name: req.body.name})
+    const product = await E.saveEvents([createProduct])
+
+    return res.json({product})
+  },
+
+  eventUpdateCC: async(req, res) => {
+    const updateProduct = E.UpdateProductCC({cc: req.body.cc, new_cc: req.body.new_cc})
+    const product = await E.saveEvents([updateProduct])
+
+    return res.json({product})
+  },
+
+  eventUpdateName: async(req, res) => {
+    const updateProduct = E.UpdateProductName({cc: req.body.cc, name: req.body.name})
+    const product = await E.saveEvents([updateProduct])
+
+    return res.json({product})
+  },
+
+  eventDelete: async(req, res) => {
+    const deleteProduct = E.DeleteProduct({cc: req.body.cc})
+    const output = await E.saveEvents([deleteProduct])
+
+    return res.json({output})
   }
 } 
