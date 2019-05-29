@@ -13,6 +13,7 @@ router.post('/createProduct', productController.eventCreate);
 router.post('/updateProductCC', productController.eventUpdateCC);
 router.post('/updateProductName', productController.eventUpdateName);
 router.post('/deleteProduct', productController.eventDelete);
+router.get('/events', productController.eventList);
 
 
 

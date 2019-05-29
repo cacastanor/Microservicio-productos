@@ -90,5 +90,15 @@ delete: function(req, res, next) {
     const output = await E.saveEvents([deleteProduct])
 
     return res.json({output})
+  },
+
+  eventList: async(req, res) => {
+    E.ProductEvent.find(function (err, result){
+      if (err){
+        console.log("Error listing events : "+err)
+        return res.json({status:"failed"})
+      }else
+        return res.json({result})
+    });
   }
 } 

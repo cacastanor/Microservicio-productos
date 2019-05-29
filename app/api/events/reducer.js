@@ -6,6 +6,7 @@ const reduce = async productEvent => {
   console.log("--------------------------");
 
   if (productEvent.type === eventNames.CreateProduct) {
+  // create
     const product = new Product({ cc: productEvent.cc, name: productEvent.data.name });
     await productEvent.save();
     const savedProduct = await product.save();
@@ -14,6 +15,7 @@ const reduce = async productEvent => {
     return savedProduct;
 
   } else if (productEvent.type === eventNames.UpdateProductCC) {
+  //update cc
     const product = await Product.findOne({ cc: productEvent.cc });
     product.cc = productEvent.data.new_cc;
     await productEvent.save();
@@ -24,6 +26,7 @@ const reduce = async productEvent => {
     return savedProduct;
 
   } else if (productEvent.type === eventNames.UpdateProductName) {
+  // update name
     const product = await Product.findOne({ cc: productEvent.cc });
     product.name = productEvent.data.name
     await productEvent.save();
@@ -34,12 +37,13 @@ const reduce = async productEvent => {
     return savedProduct;
 
   } else {
-    await Product.deleteOne({cc: productEvent.data.cc });
+  // Delete
+    const output = await Product.deleteOne({cc: productEvent.cc });
     await productEvent.save();
     console.log(`Applied ${productEvent.type} successfully`);
     console.log("--------------------------");
 
-    return "I do not know the return value for this"
+    return output
 
       ////// ********* find product and list products events missing *********** /////////
   }
