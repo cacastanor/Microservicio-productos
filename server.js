@@ -25,7 +25,7 @@ app.use(bodyParser.urlencoded({
 
 //Redirect all '/' request  to authentication.
 app.get('/', function(req, res){  
-  res.send('Products CRUD ');
+  res.send('Products microservice ');
 });
 
 //Statics (Styles and JS)

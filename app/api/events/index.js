@@ -19,16 +19,12 @@ const CreateProduct = makeProductEvent(eventNames.CreateProduct);
 const UpdateProductCC = makeProductEvent(eventNames.UpdateProductCC);
 const UpdateProductName = makeProductEvent(eventNames.UpdateProductName);
 const DeleteProduct = makeProductEvent(eventNames.DeleteProduct);
-const FindProduct = makeProductEvent(eventNames.FindProduct);
-const ListProducts = makeProductEvent(eventNames.ListProducts);
 
 module.exports = {
   CreateProduct,
   UpdateProductCC,
   UpdateProductName,
   DeleteProduct,
-  FindProduct,
-  ListProducts,
   ProductEvent,
   eventNames,
   saveEvents

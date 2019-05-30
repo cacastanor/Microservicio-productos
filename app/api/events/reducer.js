@@ -45,7 +45,6 @@ const reduce = async productEvent => {
 
     return output
 
-      ////// ********* find product and list products events missing *********** /////////
   }
 };
 
