@@ -1,12 +1,21 @@
 const productModel = require('../product/product');
 const E = require("../events");
+const comm = require("../communication/consumer")
+
+
+comm.consumer.on('message', async function(message) {
+    // Read string into a buffer.
+    var buf = new Buffer.from(message.value, "binary"); 
+    var decodedMessage = JSON.parse(buf.toString());
+    console.log(decodedMessage)
+})
+
 
 module.exports = {
-// commands
+// Commands
   eventCreate: async(req, res) => {
     const createProduct = E.CreateProduct({cc: req.body.cc, name: req.body.name})
     const product = await E.saveEvents([createProduct])
-
     return res.json({product})
   },
 
