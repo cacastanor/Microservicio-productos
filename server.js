@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 //App imports
 const products = require('./routes/products');
-
+const KafkaService = require("./app/api/communication/consumer")
 const config = require('./config/database'); //database configuration
 const mongoose = require('mongoose');
 
@@ -44,6 +44,8 @@ app.use(function(err, req, res, next) {
     }
 });
 
+
+KafkaService.startConsumer()
 //Server listening at port 4000
 app.listen(4000, function(){
 	console.log('Node server listening on port 4000');
