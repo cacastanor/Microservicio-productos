@@ -1,49 +1,25 @@
 const eventNames = require("./eventNames");
-const Product = require("../product/product");
 
 const reduce = async productEvent => {
-  console.log(`Trying to apply ${productEvent.type}`);
-  console.log("--------------------------");
 
   if (productEvent.type === eventNames.CreateProduct) {
-  // create
-    const product = new Product({ cc: productEvent.cc, name: productEvent.data.name });
     await productEvent.save();
-    const savedProduct = await product.save();
-    console.log(`Applied ${productEvent.type} successfully`);
-    console.log("--------------------------");
-    return savedProduct;
+    return {state: "success", id: productEvent.id};
 
   } else if (productEvent.type === eventNames.UpdateProductCC) {
   //update cc
-    const product = await Product.findOne({ cc: productEvent.cc });
-    product.cc = productEvent.data.new_cc;
     await productEvent.save();
-    const savedProduct = await product.save();
-
-    console.log(`Applied ${productEvent.type} successfully`);
-    console.log("--------------------------");
-    return savedProduct;
+    return "success";
 
   } else if (productEvent.type === eventNames.UpdateProductName) {
   // update name
-    const product = await Product.findOne({ cc: productEvent.cc });
-    product.name = productEvent.data.name
     await productEvent.save();
-    const savedProduct = await product.save();
-
-    console.log(`Applied ${productEvent.type} successfully`);
-    console.log("--------------------------");
-    return savedProduct;
+    return "success";
 
   } else {
   // Delete
-    const output = await Product.deleteOne({cc: productEvent.cc });
     await productEvent.save();
-    console.log(`Applied ${productEvent.type} successfully`);
-    console.log("--------------------------");
-
-    return output
+    return "success";
 
   }
 };

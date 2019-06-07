@@ -20,21 +20,21 @@ module.exports = {
   },
 
   eventUpdateCC: async(req, res) => {
-    const updateProduct = E.UpdateProductCC({cc: req.body.cc, new_cc: req.body.new_cc})
+    const updateProduct = E.UpdateProductCC({id: req.body.id, cc: req.body.cc})
     const product = await E.saveEvents([updateProduct])
 
     return res.json({product})
   },
 
   eventUpdateName: async(req, res) => {
-    const updateProduct = E.UpdateProductName({cc: req.body.cc, name: req.body.name})
-    const product = await E.saveEvents([updateProduct])
+    const updateProduct = E.UpdateProductName({id: req.body.id, name: req.body.name})
+    await E.saveEvents([updateProduct])
 
-    return res.json({product})
+    return res.json({status:"success"})
   },
 
   eventDelete: async(req, res) => {
-    const deleteProduct = E.DeleteProduct({cc: req.body.cc})
+    const deleteProduct = E.DeleteProduct({id: req.body.id})
     const output = await E.saveEvents([deleteProduct])
 
     return res.json({output})
@@ -54,14 +54,8 @@ module.exports = {
   },
 
   findProduct: async(req, res) => {
-    const product = productModel.findOne({cc: req.body.cc}, function(err, result){
-      if (err){
-        console.log("Error finding product : "+err)
-        return res.json({status:"failed"})
-      }else{
-        return res.json({result})
-      }
-    });
+    const findP = await E.execQuery({id: req.body.id})
+    return res.json(findP)
   },
 
   listProducts: async(req, res) => {
