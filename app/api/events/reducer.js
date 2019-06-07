@@ -18,10 +18,6 @@ const reduce = async productEvent => {
 
   } else {
   // Delete
-<<<<<<< HEAD
-    const output = await Product.deleteMany({cc: productEvent.cc });
-=======
->>>>>>> 3fa2904bca65be1e8fa602f25853f93a72af7dde
     await productEvent.save();
     return "success";
 
