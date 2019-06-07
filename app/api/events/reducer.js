@@ -38,7 +38,7 @@ const reduce = async productEvent => {
 
   } else {
   // Delete
-    const output = await Product.deleteOne({cc: productEvent.cc });
+    const output = await Product.deleteMany({cc: productEvent.cc });
     await productEvent.save();
     console.log(`Applied ${productEvent.type} successfully`);
     console.log("--------------------------");

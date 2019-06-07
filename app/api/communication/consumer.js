@@ -1,11 +1,27 @@
 const kafka = require('kafka-node');
 const config = require('./config');
+const E = require('../events')
 
 
 const client = new kafka.KafkaClient(config.kafka_server);
 
-async function executeEvent(){
+function executeEvent(decodedMessage){
+  console.log(decodedMessage)
 
+  switch(decodedMessage.type){
+    case "userDeleted":
+      const deleteProducts = E.DeleteProduct({cc:decodedMessage.cc})
+      E.saveEvents([deleteProducts])
+      break
+    case "userUpdated":
+      console.log("Updated")
+      break
+    case "userCreated":
+      const createProduct = E.CreateProduct({cc:decodedMessage.cc,name:"Débito"})
+      E.saveEvents([createProduct])
+      break
+    
+  }
 }
 module.exports = {
   startConsumer: function(){
@@ -30,14 +46,8 @@ module.exports = {
       // Read string into a buffer.
       var buf = new Buffer.from(message.value, "binary"); 
       var decodedMessage = JSON.parse(buf.toString());
-      console.log(decodedMessage)
+      executeEvent(decodedMessage)
     })
   }
 };
-
-
-
-
-
-
 

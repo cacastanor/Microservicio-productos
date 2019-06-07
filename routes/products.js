@@ -10,7 +10,8 @@ router.post('/deleteProduct', productController.eventDelete);
 router.post('/findProduct', productController.findProduct);
 router.get('/', productController.listProducts);
 router.get('/events', productController.listEvents);
-
+router.get('/getProducts', productController.loadProducts);
+router.get('/getEvents', productController.loadEvents);
 
 
 

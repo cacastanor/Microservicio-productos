@@ -1,6 +1,9 @@
 const productModel = require('../product/product');
 const E = require("../events");
 
+
+//Fs reads a file to later write it to user
+const fs = require('fs');
 module.exports = {
 // Commands
   eventCreate: async(req, res) => {
@@ -63,5 +66,21 @@ module.exports = {
         return res.json({result})
       }
     });
+  },
+
+  loadProducts: function(req, res, next) {
+    fs.readFile('./app/views/index.html',function (err, data){
+       res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+       res.write(data);
+       res.end();
+     })
+  },
+
+  loadEvents: function(req, res, next) {
+    fs.readFile('./app/views/eventos.html',function (err, data){
+       res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+       res.write(data);
+       res.end();
+     })
   }
 } 
