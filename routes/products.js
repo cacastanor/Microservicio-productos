@@ -1,17 +1,16 @@
 //Defines product routes to post and get request.
 const express = require('express');
 const router = express.Router();
-const productController = require('../app/api/controllers/products');
+const productAdapter = require('../app/api/logic/adapter');
 
-router.post('/createProduct', productController.eventCreate);
-router.post('/updateProductCC', productController.eventUpdateCC);
-router.post('/updateProductName', productController.eventUpdateName);
-router.post('/deleteProduct', productController.eventDelete);
-router.post('/findProduct', productController.findProduct);
-router.get('/', productController.listProducts);
-router.get('/events', productController.listEvents);
-router.get('/getProducts', productController.loadProducts);
-router.get('/getEvents', productController.loadEvents);
+router.post('/registerProduct', productAdapter.create);
+router.post('/updateProduct', productAdapter.update);
+//router.post('/updateProductName', productController.eventUpdateName);
+router.post('/deleteProduct', productAdapter.delete);
+router.post('/findProduct', productAdapter.findOne);
+router.get('/', productAdapter.findAll);
+router.get('/registerProduct', productAdapter.loadRegister);
+
 
 
 

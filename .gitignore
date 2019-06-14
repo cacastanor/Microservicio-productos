@@ -1,4 +1,4 @@
 node_modules
 target
 project/target
-.idea
+.idea/*
