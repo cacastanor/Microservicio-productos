@@ -66,19 +66,60 @@ delete: async(req, res, next) => {
 
  //Returns the clients found   
  findOne: async(req, res, next) => {
- 
+   productModel.find({cc:req.body.cc, tipo:req.body.tipo}, (err,result) =>
+   {
+      console.log("FindOne")
+      return res.json(result)
+   })
 },
 
  //Returns the clients found   
- findAll: async(req, res, next) => {
+ findByType: async(req, res, next) => {
+   productModel.find({tipo:req.body.tipo}, (err,result) =>
+   {
+      console.log("FindByType")
+      return res.json(result)
+   })
   },
 
+  findAll: async(req, res, next) => {
+   productModel.find((err,result) =>
+   {
+      console.log("findAll")
+      return res.json(result)
+   })
+  },
+
+  findByClient: async(req, res, next) => {
+   productModel.find({cc:req.body.cc}, (err,result) =>
+   {
+      console.log("FindByCC")
+      return res.json(result)
+   })
+  },
 
 
 //If user logged previously : redirects to UserPage
 //If user has not log in the system, loads registration page.
 loadRegister: function(req, res, next) {
-      fs.readFile('./app/views/index.html',function (err, data){
+      fs.readFile('./app/views/create.html',function (err, data){
+         res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+         res.write(data);
+         res.end();
+       })
+    },
+
+
+    loadDelete: function(req, res, next) {
+      fs.readFile('./app/views/delete.html',function (err, data){
+         res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+         res.write(data);
+         res.end();
+       })
+    },
+
+    loadUpdate: function(req, res, next) {
+      fs.readFile('./app/views/update.html',function (err, data){
          res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
          res.write(data);
          res.end();
