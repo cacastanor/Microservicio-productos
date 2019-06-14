@@ -1,6 +1,6 @@
 const kafka = require('kafka-node');
 const config = require('./config');
-const E = require('../events')
+//const E = require('../events')
 
 
 const client = new kafka.KafkaClient(config.kafka_server);
@@ -10,17 +10,17 @@ function executeEvent(decodedMessage){
 
   switch(decodedMessage.type){
     case "userDeleted":
-      const deleteProducts = E.DeleteProduct({cc:decodedMessage.cc})
-      E.saveEvents([deleteProducts])
+      //const deleteProducts = E.DeleteProduct({cc:decodedMessage.cc})
+      //E.saveEvents([deleteProducts])
       break
     case "userUpdated":
       console.log("Updated")
       break
     case "userCreated":
-      const createProduct = E.CreateProduct({cc:decodedMessage.cc,name:"Débito"})
-      E.saveEvents([createProduct])
+      //const createProduct = E.CreateProduct({cc:decodedMessage.cc,name:"Débito"})
+      //E.saveEvents([createProduct])
       break
-    
+
   }
 }
 module.exports = {
@@ -37,17 +37,16 @@ module.exports = {
       }
     );
 
-    
+
     consumer.on('error', function(err) {
       console.log('error', err);
     });
-    
+
     consumer.on('message', async function(message) {
       // Read string into a buffer.
-      var buf = new Buffer.from(message.value, "binary"); 
+      var buf = new Buffer.from(message.value, "binary");
       var decodedMessage = JSON.parse(buf.toString());
       executeEvent(decodedMessage)
     })
   }
 };
-

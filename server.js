@@ -3,7 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser')
 //App imports
 const products = require('./routes/products');
-const KafkaService = require("./app/api/communication/consumer")
+
 const config = require('./config/database'); //database configuration
 const mongoose = require('mongoose');
 
@@ -14,7 +14,7 @@ const app = express();
 //Connection to DB
 mongoose.connect(config.db,{ useNewUrlParser: true });
 var db = mongoose.connection;
-console.log(config.db)
+//console.log(config.db)
 db.on('error', function () {
   throw new Error('unable to connect to database at ' + config.db);
 });
@@ -23,10 +23,10 @@ app.use(bodyParser.urlencoded({
   extended: true
 }));
 
-//Redirect all '/' request  to authentication.
+/*//Redirect all '/' request  to authentication.
 app.get('/', function(req, res){  
   res.send('Products microservice ');
-});
+});*/
 
 //Statics (Styles and JS)
 app.use(express.static(__dirname + '/public/'));
@@ -44,8 +44,6 @@ app.use(function(err, req, res, next) {
     }
 });
 
-
-KafkaService.startConsumer()
 //Server listening at port 4000
 app.listen(4000, function(){
 	console.log('Node server listening on port 4000');
