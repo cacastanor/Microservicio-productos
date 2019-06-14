@@ -46,7 +46,6 @@ viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
         // - forward it to connected browsers via socket.io
         eventDenormalizer.onEvent(function(evt,err) {
             //console.log(evt)
-            //console.log('se crea un evento')
            // io.sockets.emit('events', evt);
         });
 
@@ -72,4 +71,4 @@ viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
 });
 
 
-module.exports = domain
+module.exports.domain = domain

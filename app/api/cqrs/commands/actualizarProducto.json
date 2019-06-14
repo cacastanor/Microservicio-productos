@@ -20,14 +20,14 @@
     "payload": {
       "type": "object",
       "properties": {
-        "newName": {
+        "tipo": {
           "type": "string"
         },
         "cc": {
           "type": "string"
         }
       },
-      "required": ["newName", "cc"]
+      "required": ["tipo", "cc"]
     }
   },
   "required": ["id", "command", "payload"]
