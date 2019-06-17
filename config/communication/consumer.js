@@ -8,20 +8,7 @@ const client = new kafka.KafkaClient(config.kafka_server);
 function executeEvent(decodedMessage){
   console.log(decodedMessage)
 
-  switch(decodedMessage.type){
-    case "userDeleted":
-      //const deleteProducts = E.DeleteProduct({cc:decodedMessage.cc})
-      //E.saveEvents([deleteProducts])
-      break
-    case "userUpdated":
-      console.log("Updated")
-      break
-    case "userCreated":
-      //const createProduct = E.CreateProduct({cc:decodedMessage.cc,name:"Débito"})
-      //E.saveEvents([createProduct])
-      break
 
-  }
 }
 module.exports = {
   startConsumer: function(){
@@ -39,14 +26,17 @@ module.exports = {
 
 
     consumer.on('error', function(err) {
-      console.log('error', err);
+      if(err){
+        console.log('error', err);
+      }
+      console.log("Kafka consumer ready")
     });
 
     consumer.on('message', async function(message) {
       // Read string into a buffer.
       var buf = new Buffer.from(message.value, "binary");
       var decodedMessage = JSON.parse(buf.toString());
-      executeEvent(decodedMessage)
+      console.log(decodedMessage)
     })
   }
 };

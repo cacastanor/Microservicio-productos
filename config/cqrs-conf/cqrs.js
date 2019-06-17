@@ -60,8 +60,8 @@ viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
                 return err;
             }
             console.log("Domain ready")
+            KafkaService.startConsumer()
             domain.onEvent(function(evt) {
-                //KafkaService.sendRecord(evt)
                 eventDenormalizer.handle(evt)
             });
           

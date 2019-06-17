@@ -10,8 +10,8 @@ router.post('/deleteProduct', productAdapter.delete);
 router.post('/findProduct', productAdapter.findOne);
 
 router.get('/', productAdapter.findAll);
-router.get('/findByClient', productAdapter.findByClient);
-router.get('/findByType', productAdapter.findByType);
+router.post('/findByClient', productAdapter.findByClient);
+router.post('/findByType', productAdapter.findByType);
 
 router.get('/registerProduct', productAdapter.loadRegister);
 router.get('/deleteProduct', productAdapter.loadRegister);
