@@ -3,10 +3,10 @@ module.exports = {
         type: 'mongodb',
         host: 'localhost',                          // optional
         port: 27017,                                // optional
-        dbName: 'domain-productos',                           // optional
-        eventsCollectionName: 'eventos',             // optional
+        dbName: 'domain-products',                           // optional
+        eventsCollectionName: 'events',             // optional
         snapshotsCollectionName: 'snapshots',       // optional 
-        transactionsCollectionName: 'transactiones', // optional
+        transactionsCollectionName: 'transactions', // optional
     },
     eventDefinition : {
         correlationId: 'commandId',

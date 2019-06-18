@@ -11,7 +11,7 @@ function commandHandler(data,command){
        id: uuid4(),
        command: command,
        aggregate: {
-       name: 'productos'
+       name: 'products'
        },
        payload: data
     }, err => {
@@ -30,30 +30,30 @@ module.exports = {
 */
 //Creates a new client with name and cc
  create: async(req, res, next) => {
-     console.log("Crear")
-     data = {tipo: req.body.tipo, cc: req.body.cc }
-     commandHandler(data,'crearProducto')
+     console.log("Create")
+     data = {type: req.body.type, cc: req.body.cc }
+     commandHandler(data,'createProduct')
      return res.json({status:"success"})
  },
 
  //Updates a client CC and name via its cc
  update: async(req, res, next) => {
-   productModel.find({cc:req.body.cc, tipo:req.body.tipo}, (err,result) =>
+   productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Update")
-      data = {cc:req.body.cc, tipo:req.body.tipo, id:result[0].id}
-      commandHandler(data,'actualizarProducto')
+      data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
+      commandHandler(data,'updateProduct')
       return res.json({status:"success"})
    })
 },
 
 //Deletes a client via its cc
 delete: async(req, res, next) => {
-   productModel.find({cc:req.body.cc, tipo:req.body.tipo}, (err,result) =>
+   productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Delete")
-      data = {cc:req.body.cc, tipo:req.body.tipo, id:result[0].id}
-      commandHandler(data,'eliminarProducto')
+      data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
+      commandHandler(data,'deleteProduct')
       return res.json({status:"success"})
    })
  },
@@ -66,7 +66,7 @@ delete: async(req, res, next) => {
 
  //Returns the clients found   
  findOne: async(req, res, next) => {
-   productModel.find({cc:req.body.cc, tipo:req.body.tipo}, (err,result) =>
+   productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("FindOne")
       return res.json(result)
@@ -75,7 +75,7 @@ delete: async(req, res, next) => {
 
  //Returns the clients found   
  findByType: async(req, res, next) => {
-   productModel.find({tipo:req.body.tipo}, (err,result) =>
+   productModel.find({type:req.body.type}, (err,result) =>
    {
       console.log("FindByType")
       return res.json(result)

@@ -1,5 +1,5 @@
 module.exports = require('cqrs-eventdenormalizer').defineViewBuilder({
-  name: 'productoActualizado',
-  aggregate: 'productos',
+  name: 'updatedProduct',
+  aggregate: 'products',
   id: 'payload.id'
 }, 'update');
