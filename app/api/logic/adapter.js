@@ -29,31 +29,34 @@ module.exports = {
 
 */
 //Creates a new client with name and cc
- create: async(req, res, next) => {
+ create: function(req, res, next) {
      console.log("Create")
      data = {type: req.body.type, cc: req.body.cc }
      commandHandler(data,'createProduct')
+     if(res)
      return res.json({status:"success"})
  },
 
  //Updates a client CC and name via its cc
- update: async(req, res, next) => {
+ update: function(req, res, next) {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Update")
       data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
       commandHandler(data,'updateProduct')
+      if(res)
       return res.json({status:"success"})
    })
 },
 
 //Deletes a client via its cc
-delete: async(req, res, next) => {
+delete: function(req, res, next) {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Delete")
       data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
       commandHandler(data,'deleteProduct')
+      if(res)
       return res.json({status:"success"})
    })
  },
@@ -65,7 +68,7 @@ delete: async(req, res, next) => {
 */
 
  //Returns the clients found   
- findOne: async(req, res, next) => {
+ findOne: function(req, res, next) {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("FindOne")
@@ -74,7 +77,7 @@ delete: async(req, res, next) => {
 },
 
  //Returns the clients found   
- findByType: async(req, res, next) => {
+ findByType: function(req, res, next) {
    productModel.find({type:req.body.type}, (err,result) =>
    {
       console.log("FindByType")
@@ -82,7 +85,7 @@ delete: async(req, res, next) => {
    })
   },
 
-  findAll: async(req, res, next) => {
+  findAll: function(req, res, next) {
    productModel.find((err,result) =>
    {
       console.log("findAll")
@@ -90,7 +93,7 @@ delete: async(req, res, next) => {
    })
   },
 
-  findByClient: async(req, res, next) => {
+  findByClient: function(req, res, next) {
    productModel.find({cc:req.body.cc}, (err,result) =>
    {
       console.log("FindByCC")

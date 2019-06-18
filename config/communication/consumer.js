@@ -1,7 +1,6 @@
 const kafka = require('kafka-node');
 const config = require('./config');
-//const E = require('../events')
-
+const reducer = require('./reducer')
 
 const client = new kafka.KafkaClient(config.kafka_server);
 
@@ -24,16 +23,17 @@ module.exports = {
       }
     );
 
-
     consumer.on('error', function(err) {
         console.log('error', err);
+        
     });
 
     consumer.on('message', async function(message) {
       // Read string into a buffer.
       var buf = new Buffer.from(message.value, "binary");
       var decodedMessage = JSON.parse(buf.toString());
-      console.log(decodedMessage)
+      const productAdapter = require('../../app/api/logic/adapter');
+      reducer.reduceEvents(decodedMessage.event,decodedMessage.payload,productAdapter)
     })
   }
 };

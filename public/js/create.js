@@ -18,7 +18,7 @@ $(document).ready(function() {
 		//When users click in register button send a post request with data
 		//entered if data sent is ok, redirects to authentication and creates
 		//a new product in DB, else show error.
-		$.post("/products/registerProduct", { tipo: $("#tipo").val(),
+		$.post("/products/registerProduct", { type: $("#type").val(),
 		 cc: $("#cc").val(),}).done(function(res) {
 		  if(res.status === "success"){
 		
