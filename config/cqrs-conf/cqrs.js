@@ -65,8 +65,10 @@ viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
             KafkaConsumer.startConsumer()
             
             domain.onEvent(function(evt) {
-                KafkaProducer.sendRecord(evt)
-                eventDenormalizer.handle(evt)
+                if(evt.event !== "commandRejected"){
+                    KafkaProducer.sendRecord(evt)
+                    eventDenormalizer.handle(evt)
+                }
             });
           
           });
