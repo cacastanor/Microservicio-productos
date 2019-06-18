@@ -1,5 +1,5 @@
 {
-  "title": "actualizarProducto",
+  "title": "updateProduct",
   "type": "object",
   "properties": {
     "id": {

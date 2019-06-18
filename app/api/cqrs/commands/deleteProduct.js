@@ -1,5 +1,5 @@
 module.exports = require('cqrs-domain').defineCommand({
-  name: 'eliminarProducto'
+  name: 'deleteProduct'
 }, function (data, aggregate) {
-  aggregate.apply('productoEliminado', data);
+  aggregate.apply('deletedProduct', data);
 });

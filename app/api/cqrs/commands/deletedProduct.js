@@ -1,6 +1,6 @@
 module.exports = require('cqrs-domain').defineEvent({
-  name: 'productoActualizado'
+  name: 'deletedProduct'
 },
 function (data, aggregate) {
-  aggregate.set(data);
+  aggregate.destroy();
 });

@@ -1,5 +1,5 @@
 module.exports = require('cqrs-domain').defineEvent({
-  name: 'productoCreado'
+  name: 'createdProduct'
 },
 function (data, aggregate) {
   aggregate.set(data);
