@@ -1,4 +1,6 @@
-const KafkaService = require('../communication/consumer');
+const KafkaConsumer = require('../communication/consumer');
+const KafkaProducer = require('../communication/producer');
+
 var domainConfig = require('./defs');;
 var path = require("path");
 
@@ -60,8 +62,10 @@ viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
                 return err;
             }
             console.log("Domain ready")
-            KafkaService.startConsumer()
+            KafkaConsumer.startConsumer()
+            
             domain.onEvent(function(evt) {
+                KafkaProducer.sendRecord(evt)
                 eventDenormalizer.handle(evt)
             });
           

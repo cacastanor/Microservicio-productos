@@ -14,7 +14,7 @@ module.exports = {
   startConsumer: function(){
     let consumer = new kafka.Consumer(
       client,
-      [{ topic: config.kafka_topic, partition: 0 }],
+      [{ topic: config.kafka_clients_topic, partition: 0 }],
       {
         autoCommit: true,
         fetchMaxWaitMs: 1000,
@@ -26,10 +26,7 @@ module.exports = {
 
 
     consumer.on('error', function(err) {
-      if(err){
         console.log('error', err);
-      }
-      console.log("Kafka consumer ready")
     });
 
     consumer.on('message', async function(message) {
