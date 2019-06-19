@@ -30,8 +30,12 @@ module.exports = {
 */
 //Creates a new client with name and cc
  create: function(req, res, next) {
+   ready = 0 
+   if(req.body.done){
+       ready = 1
+    }
      console.log("Create")
-     data = {type: req.body.type, cc: req.body.cc }
+     data = {type: req.body.type, cc: req.body.cc, done:ready}
      commandHandler(data,'createProduct')
      if(res)
      return res.json({status:"success"})

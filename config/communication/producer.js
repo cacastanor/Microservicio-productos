@@ -18,7 +18,6 @@ producer.on('error', function(err) {
 const KafkaService = {
     sendRecord: (event, callback = () => {}) => { 
         const buffer = new Buffer.from(JSON.stringify(event));
- 
         // Create a new payload
         const record = [
             {
@@ -28,7 +27,10 @@ const KafkaService = {
             }
         ];
         //Send record to Kafka and log result/error
-        producer.send(record, callback);
+        console.log(event.payload.done)
+        if(event.payload.done === 0){
+            producer.send(record, callback);
+        }
     }
 };
  

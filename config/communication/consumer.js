@@ -4,11 +4,6 @@ const reducer = require('./reducer')
 
 const client = new kafka.KafkaClient(config.kafka_server);
 
-function executeEvent(decodedMessage){
-  console.log(decodedMessage)
-
-
-}
 module.exports = {
   startConsumer: function(){
     let consumer = new kafka.Consumer(
@@ -32,8 +27,9 @@ module.exports = {
       // Read string into a buffer.
       var buf = new Buffer.from(message.value, "binary");
       var decodedMessage = JSON.parse(buf.toString());
-      const productAdapter = require('../../app/api/logic/adapter');
-      reducer.reduceEvents(decodedMessage.event,decodedMessage.payload,productAdapter)
+        const productAdapter = require('../../app/api/logic/adapter');
+        reducer.reduceEvents(decodedMessage.event,decodedMessage.payload,productAdapter)
+
     })
   }
 };
