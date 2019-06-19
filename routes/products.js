@@ -8,7 +8,8 @@ router.post('/updateProduct', productAdapter.update);
 //router.post('/updateProductName', productController.eventUpdateName);
 router.post('/deleteProduct', productAdapter.delete);
 router.post('/findProduct', productAdapter.findOne);
-
+router.post('/rebuild', productAdapter.rebuild);
+router.post('/clientsOfProduct', productAdapter.clientsOfProduct);
 router.get('/', productAdapter.findAll);
 router.post('/findByClient', productAdapter.findByClient);
 router.post('/findByType', productAdapter.findByType);

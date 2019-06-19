@@ -5,6 +5,7 @@ const productModel = require('../models/products');
 const uuid4 = require('uuid4');
 //Fs reads a file to later write it to user
 const fs = require('fs');
+const executer = require('./executer')
 
 function commandHandler(data,command){
     domain.handle({
@@ -46,7 +47,7 @@ module.exports = {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Update")
-      data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
+      data = {cc:req.body.cc, type:req.body.newType, id:result[0].id}
       commandHandler(data,'updateProduct')
       if(res)
       return res.json({status:"success"})
@@ -106,9 +107,9 @@ delete: function(req, res, next) {
   },
 
 
-//If user logged previously : redirects to UserPage
-//If user has not log in the system, loads registration page.
-loadRegister: function(req, res, next) {
+    //If user logged previously : redirects to UserPage
+    //If user has not log in the system, loads registration page.
+    loadRegister: function(req, res, next) {
       fs.readFile('./app/views/create.html',function (err, data){
          res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
          res.write(data);
@@ -131,5 +132,17 @@ loadRegister: function(req, res, next) {
          res.write(data);
          res.end();
        })
+    },
+
+    rebuild: function(req, res, next) {
+      result = executer.rebuild();
+      return res.json(result);
+    },
+
+    clientsOfProduct: function(req, res, next) {
+      productModel.find({type: req.body.type}, (err, result) => {
+        if (err) throw err;
+        return res.json(JSON.parse(JSON.stringify(result[0])).cc)
+      })
     }
 } 
