@@ -1,6 +1,5 @@
-const KafkaConsumer = require('../communication/consumer');
 const KafkaProducer = require('../communication/producer');
-
+const KafkaConsumer = require('../communication/consumer');
 var domainConfig = require('./defs');;
 var path = require("path");
 
@@ -20,8 +19,8 @@ if(err){
   return err
 }
 console.log("EventStore ready")
-}) 
-const viewmodel = require('viewmodel')
+})
+
 const eventDenormalizerConfig = require('./eventDenormalizer-config')
 
 
@@ -30,8 +29,6 @@ var eventDenormalizerOptions = {
     repository: eventDenormalizerConfig.repository,
     revisionGuardStore: eventDenormalizerConfig.revisionGuardStore
 };
-
-viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
 
     const eventDenormalizer = require('cqrs-eventdenormalizer')(eventDenormalizerOptions);
 
@@ -43,38 +40,23 @@ viewmodel.read(eventDenormalizerOptions.repository, function(err, repository) {
         }
         console.log("EventDenormalizer ready")
 
-        // on receiving an __event__ from eventDenormalizer module:
-        //
-        // - forward it to connected browsers via socket.io
-        eventDenormalizer.onEvent(function(evt,err) {
-            //console.log(evt)
-           // io.sockets.emit('events', evt);
-        });
-
-
-        eventDenormalizer.onEventMissing(function (info, evt) {
-            console.log("Missed event")
-            console.log(evt)
-        });
-
         domain.init(function(err) {
             if (err) {
                 return err;
             }
+            KafkaConsumer.startConsumer();
             console.log("Domain ready")
-            KafkaConsumer.startConsumer()
-            
             domain.onEvent(function(evt) {
                 if(evt.event !== "commandRejected"){
                     KafkaProducer.sendRecord(evt)
                     eventDenormalizer.handle(evt)
                 }
             });
-          
           });
+
     });
-   
-});
+
 
 
 module.exports.domain = domain
+module.exports.eventDenormalizer = eventDenormalizer
