@@ -11,13 +11,13 @@ const mongoose = require('mongoose');
 const app = express();
 
 
-//Connection to DB
+/*//Connection to DB
 mongoose.connect(config.db,{ useNewUrlParser: true });
 var db = mongoose.connection;
 //console.log(config.db)
 db.on('error', function () {
   throw new Error('unable to connect to database at ' + config.db);
-});
+});*/
 
 app.use(bodyParser.urlencoded({
   extended: true

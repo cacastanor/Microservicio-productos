@@ -12,7 +12,8 @@ var config = {
       name: 'productBD'
     },
     port: process.env.PORT || 4000,
-    db: 'mongodb://localhost/productsQueries'
+    db_queries: 'mongodb://localhost/productsQueries',
+    db_commands: 'mongodb://localhost/domain-products'
     //db: 'mongodb+srv://Carlos:1234@mongodb-iqhqy.mongodb.net/productBD?retryWrites=true&w=majority'
   },
 

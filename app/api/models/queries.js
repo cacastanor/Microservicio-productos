@@ -1,8 +1,8 @@
-const mongoose = require('mongoose');
+const mongoose = require('./queries_db_connect');
 
 //Define a schema for Clients
 const Schema = mongoose.Schema;
-const ProductsSchema = new Schema({
+const QueriesSchema = new Schema({
  type: {
   type: String,
   trim: true,  
@@ -16,4 +16,4 @@ const ProductsSchema = new Schema({
 }, { collection : 'products' });
 
 
-module.exports = mongoose.model('products', ProductsSchema);
+module.exports = mongoose.model('products', QueriesSchema);

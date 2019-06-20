@@ -1,7 +1,7 @@
 //Imports User Model
 
 const domain = require('../../../config/cqrs-conf/cqrs').domain;
-const productModel = require('../models/products');
+const queriesModel = require('../models/queries');
 const uuid4 = require('uuid4');
 //Fs reads a file to later write it to user
 const fs = require('fs');
@@ -44,7 +44,7 @@ module.exports = {
 
  //Updates a client CC and name via its cc
  update: function(req, res, next) {
-   productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
+   queriesModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Update")
       data = {cc:req.body.cc, type:req.body.newType, id:result[0].id, oldType : req.body.type}
@@ -56,7 +56,7 @@ module.exports = {
 
 //Deletes a client via its cc
 delete: function(req, res, next) {
-   productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
+   queriesModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Delete")
       data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
@@ -67,7 +67,7 @@ delete: function(req, res, next) {
  },
 
  deleteAll: function(req, res, next) {
-   productModel.find({cc:req.body.cc}, (err,result) =>
+   queriesModel.find({cc:req.body.cc}, (err,result) =>
    {
       console.log("DeleteAll")
       for(product in result){
@@ -88,7 +88,7 @@ delete: function(req, res, next) {
 
  //Returns the clients found   
  findOne: function(req, res, next) {
-   productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
+   queriesModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("FindOne")
       return res.json(result)
@@ -97,7 +97,7 @@ delete: function(req, res, next) {
 
  //Returns the clients found   
  findByType: function(req, res, next) {
-   productModel.find({type:req.body.type}, (err,result) =>
+   queriesModel.find({type:req.body.type}, (err,result) =>
    {
       console.log("FindByType")
       return res.json(result)
@@ -105,7 +105,7 @@ delete: function(req, res, next) {
   },
 
   findAll: function(req, res, next) {
-   productModel.find((err,result) =>
+   queriesModel.find((err,result) =>
    {
       console.log("findAll")
       return res.json(result)
@@ -113,7 +113,7 @@ delete: function(req, res, next) {
   },
 
   findByClient: function(req, res, next) {
-   productModel.find({cc:req.body.cc}, (err,result) =>
+   queriesModel.find({cc:req.body.cc}, (err,result) =>
    {
       console.log("FindByCC")
       return res.json(result)
@@ -154,7 +154,7 @@ delete: function(req, res, next) {
     },
 
     clientsOfProduct: function(req, res, next) {
-      productModel.find({type: req.body.type}, (err, result) => {
+      queriesModel.find({type: req.body.type}, (err, result) => {
         if (err) throw err;
         return res.json(JSON.parse(JSON.stringify(result[0])).cc)
       })
