@@ -148,6 +148,14 @@ delete: function(req, res, next) {
        })
     },
 
+    loadSearch: function(req, res, next) {
+      fs.readFile('./app/views/find.html',function (err, data){
+         res.writeHead(200, {'Content-Type': 'text/html','Content-Length':data.length});
+         res.write(data);
+         res.end();
+       })
+    },
+    
     rebuild: function(req, res, next) {
       result = executer.rebuild();
       return res.json(result);

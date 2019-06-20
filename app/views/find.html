@@ -2,10 +2,11 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Buscar</title>
+		<title>Ver productos</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-		<!-- MATERIAL DESIGN ICONIC FONT -->
+        <!-- MATERIAL DESIGN ICONIC FONT -->
+        <link href="../css/dataTables.bootstrap4.min.css" rel="stylesheet">
 		<link rel="stylesheet" href="../fonts/material-design-iconic-font/css/material-design-iconic-font.min.css">
 		<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 		<!-- STYLE CSS -->
@@ -13,39 +14,51 @@
 	</head>
 
 	<body>
-
+			<div class="topnav">
+					<a  href="http://localhost:4000/products/registerProduct">Registrar</a>
+					<a  href="http://localhost:4000/products/deleteProduct">Eliminar</a>
+					<a  href="http://localhost:4000/products/updateProduct">Actualizar</a>
+					<a   class="active" href="http://localhost:4000/products/searchProduct">Buscar</a>
+				</div>
 		<div class="wrapper">
-				<div class="inner"></div>
 			<div class="inner">
 				<div class="image-holder">
 					<img src="../images/registration-form-6.jpg" alt="">
 				</div>
 				<form action="">
-					<h3>Registrar un nuevo producto</h3>
-					<div class="form-row">
-						<!--input type="text" class="form-control" id="name" placeholder="Nombre"-->
-						<input type="text" class="form-control" id="cc" placeholder="Cédula dueño">
-					</div>
-					<div class="form-row">
-						<!--input type="text" class="form-control" placeholder="Correo"-->
-						<div class="form-holder">
-							<select name="" id="tipo" class="form-control">
-								<option value="" disabled selected>Producto asociado</option>
-								<option value="01">Tarjeta débito</option>
-								<option value="02">Tarjeta crédito</option>
-							</select>
-							<i class="zmdi zmdi-chevron-down"></i>
+					<h3>Buscar producto</h3>
+					<div class="form-row" style ="text-align: center">
+							<div class="form-holder" style="margin-left: auto;margin-right: auto;">
+									<select name="" id="type"  class="form-control">
+										<option value="" disabled selected>Producto asociado</option>
+										<option value="debito">Tarjeta débito</option>
+										<option value="credito">Tarjeta crédito</option>
+										<option value="cheque">Cheque</option>
+									</select>
+									<i class="zmdi zmdi-chevron-down"></i>
+								</div>
 						</div>
-					</div>
-					<button id="register">Registrar
-						<i class="zmdi zmdi-long-arrow-right"></i>
+					<button id="register" style="margin-bottom: 15px">Buscar
+							<i class="zmdi zmdi-long-arrow-right"></i>
 					</button>
-				</form>
+					<div class="form-row">
+							<input type="text" class="form-control" placeholder="Cedula" disabled>
+							<input type="text" class="form-control" placeholder="Fecha creación" disabled>
+					</div>
+					<div id="products">
 				
+					</div>
+				
+
 			</div>
 		</div>
 
-		<script src="../js/jquery-3.3.1.min.js"></script>
-		<script src="../js/main.js"></script>
+        <script src="../js/jquery-3.3.1.min.js"></script>
+        <script src="../js/jquery.dataTables.min.js"></script>
+        <script src="../js/dataTables.bootstrap4.min.js"></script>
+        <script src="../js/search.js"></script>
+        		<!-- Page level plugins -->
+
+
 	</body><!-- This templates was made by Colorlib (https://colorlib.com) -->
-</html>
+</html> 
