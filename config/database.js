@@ -33,7 +33,7 @@ var config = {
       name: 'productBD'
     },
     port: process.env.PORT || 4000,
-    db: 'mongodb://mongo-server/productBD'
+    db: 'mongodb://mongo-server/productsQueries'
   }
 };
 
