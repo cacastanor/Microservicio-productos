@@ -46,7 +46,7 @@ module.exports = {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
       console.log("Update")
-      data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
+      data = {cc:req.body.cc, type:req.body.newType, id:result[0].id, oldType : req.body.type}
       commandHandler(data,'updateProduct')
       if(res)
       return res.json({status:"success"})
@@ -60,6 +60,20 @@ delete: function(req, res, next) {
       console.log("Delete")
       data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
       commandHandler(data,'deleteProduct')
+      if(res)
+      return res.json({status:"success"})
+   })
+ },
+
+ deleteAll: function(req, res, next) {
+   productModel.find({cc:req.body.cc}, (err,result) =>
+   {
+      console.log("DeleteAll")
+      for(product in result){
+         console.log(result[product])
+         data = {cc:req.body.cc, type:result[product].type, id:result[product].id, done:1}
+         commandHandler(data,'deleteProduct')
+      }
       if(res)
       return res.json({status:"success"})
    })

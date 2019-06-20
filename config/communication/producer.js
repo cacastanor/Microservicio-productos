@@ -27,8 +27,7 @@ const KafkaService = {
             }
         ];
         //Send record to Kafka and log result/error
-        console.log(event.payload.done)
-        if(event.payload.done === 0){
+        if(event.payload.done !== 1){
             producer.send(record, callback);
         }
     }

@@ -11,6 +11,10 @@ switch(type){
         req.body.done = payload.done
         functions.create(req,null)
         break;
+    case "clientDeleted":
+        req.body.cc = payload.cc
+        functions.deleteAll(req,null)
+        break;
 }
 }   
 }

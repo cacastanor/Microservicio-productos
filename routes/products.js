@@ -14,8 +14,8 @@ router.post('/findByClient', productAdapter.findByClient);
 router.post('/findByType', productAdapter.findByType);
 
 router.get('/registerProduct', productAdapter.loadRegister);
-router.get('/deleteProduct', productAdapter.loadRegister);
-router.get('/updateProduct', productAdapter.loadRegister);
+router.get('/deleteProduct', productAdapter.loadDelete);
+router.get('/updateProduct', productAdapter.loadUpdate);
 
 
 
