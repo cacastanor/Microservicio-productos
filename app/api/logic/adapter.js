@@ -46,11 +46,16 @@ module.exports = {
  update: function(req, res, next) {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
-      console.log("Update")
-      data = {cc:req.body.cc, type:req.body.newType, id:result[0].id, oldType : req.body.type}
-      commandHandler(data,'updateProduct')
-      if(res)
-      return res.json({status:"success"})
+      if(result.length > 0){
+        console.log("Update")
+        data = {cc:req.body.cc, type:req.body.newType, id:result[0].id, oldType : req.body.type}
+        commandHandler(data,'updateProduct')
+        if(res)
+        return res.json({status:"success"})
+      }else{
+        if(res)
+        return res.json({status: "failed"})
+      }
    })
 },
 
@@ -58,11 +63,16 @@ module.exports = {
 delete: function(req, res, next) {
    productModel.find({cc:req.body.cc, type:req.body.type}, (err,result) =>
    {
-      console.log("Delete")
-      data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
-      commandHandler(data,'deleteProduct')
-      if(res)
-      return res.json({status:"success"})
+      if(result.length > 0){
+          console.log("Delete")
+          data = {cc:req.body.cc, type:req.body.type, id:result[0].id}
+          commandHandler(data,'deleteProduct')
+          if(res)
+          return res.json({status:"success"})
+      }else{
+        if(res)
+        return res.json({status: "failed"})
+      }
    })
  },
 
@@ -164,7 +174,11 @@ delete: function(req, res, next) {
     clientsOfProduct: function(req, res, next) {
       productModel.find({type: req.body.type}, (err, result) => {
         if (err) throw err;
-        return res.json(JSON.parse(JSON.stringify(result[0])).cc)
+        if(result.length > 0){
+          return res.json(JSON.parse(JSON.stringify(result[0])).cc)
+        }else{
+          return res.json({})
+        }
       })
     }
-} 
+}
