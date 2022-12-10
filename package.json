@@ -24,7 +24,7 @@
     "body-parser": "^1.18.3",
     "cqrs-domain": "^2.14.72",
     "cqrs-eventdenormalizer": "^1.16.54",
-    "express": "^4.16.4",
+    "express": "^4.17.3",
     "express-session": "^1.15.6",
     "fs": "0.0.1-security",
     "gud": "^1.0.0",
